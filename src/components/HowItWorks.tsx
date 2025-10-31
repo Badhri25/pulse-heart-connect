@@ -34,12 +34,12 @@ const HowItWorks = () => {
             const Icon = step.icon;
             return (
               <div key={index} className="relative">
-                <div className="text-center p-8 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300 h-full">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground text-2xl font-bold mb-6 shadow-glow-cyan">
+                <div className="text-center p-8 rounded-2xl bg-glass-bg backdrop-blur-md border border-border/50 hover:border-primary/50 transition-all duration-300 h-full hover:shadow-glow-cyan group">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground text-2xl font-bold mb-6 shadow-glow-cyan group-hover:scale-110 transition-transform duration-300">
                     {step.number}
                   </div>
                   
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/20 transition-colors duration-300">
                     <Icon className="w-6 h-6" />
                   </div>
                   

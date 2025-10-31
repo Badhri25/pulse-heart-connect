@@ -50,7 +50,7 @@ const WaitlistSection = () => {
             <Button 
               type="submit"
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-cyan hover:shadow-glow-cyan transition-all duration-300 hover:scale-105 h-12"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-cyan hover:shadow-glow-cyan transition-all duration-300 hover:scale-105 animate-pulse-glow h-12"
             >
               Get Early Access
             </Button>
