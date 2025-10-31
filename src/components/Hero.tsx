@@ -13,20 +13,8 @@ const Hero = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
       
       <div className="relative z-10 max-w-6xl mx-auto text-center animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6">
-          <span className="inline-block animate-fade-in opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-            Send a{' '}
-          </span>
-          <span className="inline-block bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-pulse-glow opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-            heartbeat
-          </span>
-          <span className="inline-block animate-fade-in opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-            ,
-          </span>
-          <br />
-          <span className="inline-block animate-fade-in opacity-0" style={{ animationDelay: '1.1s', animationFillMode: 'forwards' }}>
-            not a message.
-          </span>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+          Send a heartbeat,<br />not a message.
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
