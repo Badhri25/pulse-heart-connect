@@ -11,11 +11,12 @@ const DemoSection = () => {
   };
 
   return (
-    <section className="py-24 px-4 bg-background relative overflow-hidden">
+    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-br from-pink-500/10 via-violet-500/10 to-indigo-500/10">
       {/* Background heartbeat glow */}
-      <div className="absolute inset-0 animate-pulse-glow opacity-30">
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
+      <div className="absolute inset-0 animate-pulse-glow opacity-40">
+        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
