@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const emailSchema = z.string()
+  .trim()
+  .email({ message: "Please enter a valid email address" })
+  .min(5, { message: "Email is too short" })
+  .max(255, { message: "Email is too long" });
 
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
@@ -11,22 +18,25 @@ const WaitlistSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !email.includes('@')) {
-      toast.error("Please enter a valid email address");
+    // Validate email with zod
+    const validation = emailSchema.safeParse(email);
+    if (!validation.success) {
+      toast.error(validation.error.errors[0].message);
       return;
     }
+
+    const validatedEmail = validation.data.toLowerCase();
 
     // Save to database
     const { error } = await supabase
       .from('waitlist')
-      .insert({ email: email.toLowerCase().trim() });
+      .insert({ email: validatedEmail });
 
     if (error) {
       if (error.code === '23505') {
         toast.error("This email is already on the waitlist!");
       } else {
         toast.error("Something went wrong. Please try again.");
-        console.error("Waitlist error:", error);
       }
       return;
     }
