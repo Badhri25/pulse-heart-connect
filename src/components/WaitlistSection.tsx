@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !email.includes('@')) {
@@ -15,7 +16,21 @@ const WaitlistSection = () => {
       return;
     }
 
-    // Simulate submission
+    // Save to database
+    const { error } = await supabase
+      .from('waitlist')
+      .insert({ email: email.toLowerCase().trim() });
+
+    if (error) {
+      if (error.code === '23505') {
+        toast.error("This email is already on the waitlist!");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+        console.error("Waitlist error:", error);
+      }
+      return;
+    }
+
     setIsSubmitted(true);
     toast.success("You're on the list! Stay tuned for your first pulse 💫");
     setEmail("");
