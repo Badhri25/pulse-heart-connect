@@ -11,16 +11,16 @@ const DemoSection = () => {
   };
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden bg-gradient-to-br from-pink-500/10 via-violet-500/10 to-indigo-500/10">
+    <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5">
       {/* Background heartbeat glow */}
-      <div className="absolute inset-0 animate-pulse-glow opacity-40">
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" />
+      <div className="absolute inset-0 animate-pulse-glow opacity-30">
+        <div className="absolute top-1/2 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-primary/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-secondary/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/2 w-72 md:w-96 h-72 md:h-96 bg-primary/15 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 text-foreground">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 md:mb-12 text-foreground leading-tight">
           Experience the Pulse
         </h2>
 
@@ -88,10 +88,10 @@ const DemoSection = () => {
             onClick={handlePlayDemo}
             disabled={isPlaying}
             size="lg"
-            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-glow-cyan hover:shadow-glow-cyan transition-all duration-300 hover:scale-105"
+            className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed rounded-full px-8 py-6"
           >
-            <Play className="w-5 h-5 mr-2" />
-            Play Demo
+            <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+            {isPlaying ? 'Playing...' : 'Play Demo'}
           </Button>
         </div>
       </div>

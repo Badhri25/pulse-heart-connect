@@ -90,6 +90,44 @@ export default {
             transform: "scale(1.05)",
           },
         },
+        "heartbeat": {
+          "0%, 100%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "14%": {
+            transform: "scale(1.15)",
+            opacity: "0.9",
+          },
+          "28%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+          "42%": {
+            transform: "scale(1.1)",
+            opacity: "0.95",
+          },
+          "70%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+        },
+        "gradient-wave": {
+          "0%, 100%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          },
+        },
+        "hover-lift": {
+          "0%": {
+            transform: "translateY(0) scale(1)",
+          },
+          "100%": {
+            transform: "translateY(-4px) scale(1.02)",
+          },
+        },
         "float": {
           "0%, 100%": {
             transform: "translateY(0px)",
@@ -113,15 +151,23 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+        "heartbeat": "heartbeat 2.5s ease-in-out infinite",
+        "gradient-wave": "gradient-wave 8s ease infinite",
         "float": "float 6s ease-in-out infinite",
         "fade-in": "fade-in 0.6s ease-out",
+        "hover-lift": "hover-lift 0.3s ease-out forwards",
       },
       backgroundImage: {
         "gradient-dark": "var(--gradient-dark)",
+        "gradient-cta": "var(--gradient-cta)",
       },
       boxShadow: {
         "glow-cyan": "var(--glow-cyan)",
         "glow-purple": "var(--glow-purple)",
+        "glow-pink": "var(--glow-pink)",
+      },
+      transitionTimingFunction: {
+        "smooth": "cubic-bezier(0.4, 0, 0.2, 1)",
       },
     },
   },

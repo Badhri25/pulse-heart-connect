@@ -23,38 +23,38 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-background">
+    <section className="py-16 md:py-24 px-4 bg-background">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-foreground leading-tight">
           How It Works
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div key={index} className="relative">
-                <div className="text-center p-8 rounded-2xl bg-glass-bg backdrop-blur-md border border-border/50 hover:border-primary/50 transition-all duration-300 h-full hover:shadow-glow-cyan group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground text-2xl font-bold mb-6 shadow-glow-cyan group-hover:scale-110 transition-transform duration-300">
+                <div className="text-center p-6 md:p-8 rounded-2xl bg-glass-bg backdrop-blur-md border border-border/50 hover:border-primary/50 transition-all duration-300 h-full hover:shadow-glow-cyan hover:-translate-y-1 group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-primary to-secondary text-white text-xl md:text-2xl font-bold mb-4 md:mb-6 shadow-glow-cyan group-hover:scale-110 transition-transform duration-300">
                     {step.number}
                   </div>
                   
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-foreground">
                     {step.title}
                   </h3>
                   
-                  <p className="text-muted-foreground">
+                  <p className="text-sm md:text-base text-muted-foreground">
                     {step.description}
                   </p>
                 </div>
 
                 {index < steps.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-primary to-secondary" />
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-primary to-secondary opacity-50" />
                   </div>
                 )}
               </div>

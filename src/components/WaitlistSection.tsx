@@ -47,19 +47,19 @@ const WaitlistSection = () => {
   };
 
   return (
-    <section id="waitlist" className="py-24 px-4 bg-gradient-dark relative overflow-hidden">
+    <section id="waitlist" className="py-16 md:py-24 px-4 bg-gradient-dark relative overflow-hidden">
       {/* Background glows */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 md:w-[500px] h-96 md:h-[500px] bg-primary/20 rounded-full blur-3xl animate-heartbeat" />
       
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground leading-tight">
           Be part of the first<br />
           <span className="text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text">
             100 PulsePairs
           </span>
         </h2>
         
-        <p className="text-xl text-muted-foreground mb-12">
+        <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-12">
           Join the first wave and help us build something beautiful together.
         </p>
 
@@ -70,12 +70,12 @@ const WaitlistSection = () => {
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 bg-card/60 backdrop-blur-md border-border/50 focus:border-primary text-foreground placeholder:text-muted-foreground h-12"
+              className="flex-1 bg-card/60 backdrop-blur-md border-border/50 focus:border-primary text-foreground placeholder:text-muted-foreground h-12 rounded-full px-6"
             />
             <Button 
               type="submit"
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-cyan hover:shadow-glow-cyan transition-all duration-300 hover:scale-105 animate-pulse-glow h-12"
+              className="group bg-gradient-cta hover:bg-gradient-cta text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 h-12 rounded-full px-8"
             >
               Get Early Access
             </Button>

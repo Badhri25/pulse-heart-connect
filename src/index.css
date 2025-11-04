@@ -43,9 +43,12 @@ All colors MUST be HSL.
     --radius: 1rem;
 
     --gradient-dark: linear-gradient(135deg, hsl(240 30% 10%) 0%, hsl(260 40% 15%) 50%, hsl(240 25% 8%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(330 85% 65%) 0%, hsl(280 85% 58%) 100%);
     --glow-cyan: 0 0 60px hsla(189, 94%, 43%, 0.6);
     --glow-purple: 0 0 60px hsla(280, 85%, 58%, 0.5);
+    --glow-pink: 0 0 40px hsla(330, 85%, 65%, 0.4);
     --glass-bg: hsla(240, 20%, 12%, 0.6);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
