@@ -6,17 +6,17 @@ const SolutionSection = () => {
     {
       icon: Zap,
       title: "One-tap pulse",
-      description: "Instant glow + vibration"
+      description: "Instant glow. Gentle vibration. Pure presence."
     },
     {
       icon: Clock,
-      title: "Stay connected",
-      description: "See when your partner last pinged you"
+      title: "Always in sync",
+      description: "See when they last thought of you"
     },
     {
       icon: Palette,
-      title: "Customize your glow",
-      description: "Choose your theme (Pro version)"
+      title: "Make it yours",
+      description: "Custom themes coming soon"
     }
   ];
 
@@ -28,10 +28,10 @@ const SolutionSection = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            PulsePod bridges the gap.
+            PulsePod closes the distance.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A single tap sends a gentle pulse that says 'I'm thinking of you.'
+            One tap. One gentle pulse. One way to say "I'm thinking of you."
           </p>
         </div>
 

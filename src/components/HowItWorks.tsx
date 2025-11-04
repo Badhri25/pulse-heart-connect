@@ -5,20 +5,20 @@ const HowItWorks = () => {
     {
       icon: Link2,
       number: "1",
-      title: "Pair with your partner",
-      description: "Use a short code to connect"
+      title: "Connect with someone",
+      description: "Share a simple code to pair up"
     },
     {
       icon: Hand,
       number: "2", 
-      title: "Tap once to send",
-      description: "One tap sends your pulse"
+      title: "Send a pulse",
+      description: "One tap. That's all it takes."
     },
     {
       icon: Sparkles,
       number: "3",
-      title: "They feel you instantly",
-      description: "Presence without words"
+      title: "They feel it instantly",
+      description: "Connection without words"
     }
   ];
 

@@ -4,18 +4,18 @@ const RoadmapSection = () => {
   const features = [
     {
       icon: Heart,
-      title: "Custom pulse patterns",
-      description: "Create your own rhythm"
+      title: "Custom pulse rhythms",
+      description: "Create patterns that feel like you"
     },
     {
       icon: Palette,
-      title: "Mood-based glow colors",
-      description: "Express how you feel"
+      title: "Mood-based colors",
+      description: "Let your glow reflect how you feel"
     },
     {
       icon: Users,
-      title: "Team Pulse mode",
-      description: "For friends & remote teams"
+      title: "Group connections",
+      description: "Stay present with friends or your team"
     }
   ];
 
@@ -26,7 +26,7 @@ const RoadmapSection = () => {
           What's next
         </h2>
         <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
-          Join early to help shape the future.
+          Help us build what matters to you.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">

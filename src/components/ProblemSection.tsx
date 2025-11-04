@@ -3,8 +3,8 @@ import disconnectedPhones from "@/assets/disconnected-phones.jpg";
 const ProblemSection = () => {
   const problems = [
     "We text every day, but still feel distant.",
-    "Long-distance or busy lives make connection harder.",
-    "You just want someone to *feel* that you're there."
+    "Long-distance and busy lives get in the way.",
+    "Sometimes you just want them to feel you're there."
   ];
 
   return (

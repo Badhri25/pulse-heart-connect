@@ -60,7 +60,7 @@ const WaitlistSection = () => {
         </h2>
         
         <p className="text-xl text-muted-foreground mb-12">
-          We're inviting early users to shape the future of digital presence.
+          Join the first wave and help us build something beautiful together.
         </p>
 
         {!isSubmitted ? (

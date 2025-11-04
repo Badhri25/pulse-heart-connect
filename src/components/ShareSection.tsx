@@ -5,14 +5,14 @@ const ShareSection = () => {
   const handleInvitePartner = () => {
     const subject = encodeURIComponent("Join me on PulsePod 💫");
     const body = encodeURIComponent(
-      "I just joined PulsePod — a beautiful way to feel presence without words.\n\nLet's stay connected with gentle pulses instead of endless texts.\n\nJoin the early access: https://pulsepod.app"
+      "I just joined PulsePod — a beautiful way to stay present without words.\n\nLet's feel connected through gentle pulses instead of endless messages.\n\nJoin early access: https://pulsepod.app"
     );
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   const handleShareOnX = () => {
     const tweet = encodeURIComponent(
-      "I just joined PulsePod early access — feel presence without words! 💫✨ https://pulsepod.app"
+      "Just joined PulsePod — stay connected through presence, not words 💫✨ https://pulsepod.app"
     );
     window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank');
   };

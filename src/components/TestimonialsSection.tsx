@@ -1,19 +1,19 @@
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Even 1000 miles apart, we feel close every day.",
-      author: "Early Tester",
+      quote: "We're a thousand miles apart, but I feel him with me every day.",
+      author: "Sarah M.",
       location: "California"
     },
     {
-      quote: "PulsePod is our new love language.",
-      author: "Couple",
+      quote: "This became our love language. Simple, sweet, and so us.",
+      author: "Alex & Jordan",
       location: "London"
     },
     {
-      quote: "No texts. Just presence. Beautiful.",
-      author: "Remote Worker",
-      location: "India"
+      quote: "No need for words. Just knowing she's there is everything.",
+      author: "Ravi K.",
+      location: "Mumbai"
     }
   ];
 
