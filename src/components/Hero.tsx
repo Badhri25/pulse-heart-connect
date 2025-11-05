@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroPhones from "@/assets/hero-phones.jpg";
 
 const Hero = () => {
@@ -25,14 +26,26 @@ const Hero = () => {
           One tap. One glow. One moment of presence.
         </p>
         
-        <Button 
-          onClick={scrollToWaitlist}
-          size="lg"
-          className="group text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 bg-gradient-cta hover:bg-gradient-cta text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 rounded-full"
-        >
-          <span className="relative z-10">Get Early Access</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button 
+            onClick={scrollToWaitlist}
+            size="lg"
+            className="group text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 bg-gradient-cta hover:bg-gradient-cta text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 rounded-full"
+          >
+            <span className="relative z-10">Get Early Access</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+          </Button>
+          
+          <Link to="/custom-pulse">
+            <Button 
+              size="lg"
+              variant="outline"
+              className="text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 rounded-full"
+            >
+              Customize Your Pulse ✨
+            </Button>
+          </Link>
+        </div>
 
         {/* Hero Image */}
         <div className="mt-12 md:mt-16 animate-float">
