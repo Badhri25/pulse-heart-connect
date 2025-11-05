@@ -30,7 +30,7 @@ const Hero = () => {
           size="lg"
           className="group text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 bg-gradient-cta hover:bg-gradient-cta text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 rounded-full"
         >
-          <span className="relative z-10">Join Early Access</span>
+          <span className="relative z-10">Get Early Access</span>
           <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
         </Button>
 

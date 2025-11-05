@@ -42,7 +42,7 @@ const WaitlistSection = () => {
     }
 
     setIsSubmitted(true);
-    toast.success("You're on the list! Stay tuned for your first pulse 💫");
+    toast.success("💖 Thanks for joining early access! You'll be among the first to feel the pulse.");
     setEmail("");
   };
 
