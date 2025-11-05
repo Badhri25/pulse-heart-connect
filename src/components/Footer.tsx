@@ -1,4 +1,5 @@
 import { Shield, FileText, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,27 +9,27 @@ const Footer = () => {
           <p className="text-center md:text-left">© PulsePod 2025 | Built with ❤️ by Badhri Srinivasan</p>
           
           <div className="flex gap-6">
-            <a href="#" className="group flex items-center gap-2 hover:text-primary transition-colors">
+            <Link to="/privacy" className="group flex items-center gap-2 hover:text-primary transition-colors">
               <Shield className="w-4 h-4" />
               <span className="relative">
                 Privacy
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </span>
-            </a>
-            <a href="#" className="group flex items-center gap-2 hover:text-primary transition-colors">
+            </Link>
+            <Link to="/terms" className="group flex items-center gap-2 hover:text-primary transition-colors">
               <FileText className="w-4 h-4" />
               <span className="relative">
                 Terms
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </span>
-            </a>
-            <a href="#" className="group flex items-center gap-2 hover:text-primary transition-colors">
+            </Link>
+            <Link to="/contact" className="group flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="w-4 h-4" />
               <span className="relative">
                 Contact
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
