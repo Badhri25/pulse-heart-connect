@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    
+    <!-- Primary Meta Tags -->
+    <title>PulsePod – Feel Presence, Not Distance</title>
+    <meta name="title" content="PulsePod – Feel Presence, Not Distance" />
+    <meta name="description" content="Send a heartbeat, not a message. PulsePod lets you feel presence instantly through a single tap. Join the waitlist for early access." />
+    <meta name="author" content="PulsePod" />
+    <meta name="keywords" content="presence, connection, couples app, long distance, heartbeat, pulse, emotional connection" />
+    <meta name="theme-color" content="#FF5C8D" />
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="ios-icon-192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="ios-icon-256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="ios-icon-512.png">
+
+    <!-- Prevent theme flash: set dark class ASAP based on saved preference or system -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('themeMode') || 'system';
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored === 'dark' || (stored === 'system' && prefersDark);
+          if (isDark) document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pulse-heart-connect.lovable.app/" />
+    <meta property="og:title" content="PulsePod – Feel Presence, Not Distance" />
+    <meta property="og:description" content="Send a heartbeat, not a message. PulsePod lets you feel presence instantly through a single tap." />
+    <meta property="og:image" content="og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://pulse-heart-connect.lovable.app/" />
+    <meta name="twitter:title" content="PulsePod – Feel Presence, Not Distance" />
+    <meta name="twitter:description" content="Send a heartbeat, not a message. PulsePod lets you feel presence instantly through a single tap." />
+    <meta name="twitter:image" content="og-image.png" />
+    
+    <!-- Preload critical hero image for faster LCP -->
+    <link rel="preload" as="image" href="pulse-hero.jpg" />
+
+    <!-- Analytics - Plausible (privacy-friendly) -->
+    <script defer data-domain="pulse-heart-connect.lovable.app" src="https://plausible.io/js/script.js"></script>
+    <script type="module" crossorigin src="/pulse-heart-connect/assets/index-BgeosFyz.js"></script>
+    <link rel="stylesheet" crossorigin href="/pulse-heart-connect/assets/index-DNi67U5I.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
