@@ -3,17 +3,15 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
+// ✅ FINAL CONFIG for Netlify
 export default defineConfig(({ mode }) => ({
-  base: "/pulse-heart-connect/", // 👈 Add this line (important for GitHub Pages)
-
+  base: "/", // 👈 VERY IMPORTANT: fixes all 404s on Netlify
+  build: {
+    outDir: "docs", // or "dist" if you changed earlier
+  },
   server: {
     host: "::",
     port: 8080,
-  },
-  build: {
-    outDir: "docs",
-    emptyOutDir: true,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
