@@ -6,6 +6,187 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @keyframes heartbeat-slow {
+    0%, 100% { transform: scale(1); opacity: 0.25; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.03); }
+    50% { transform: scale(1.06); }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.15), inset 0 0 30px rgba(255,255,255,0.08); opacity: 0.9; }
+    50% { transform: scale(1.06); box-shadow: 0 0 36px rgba(255,255,255,0.22), inset 0 0 48px rgba(255,255,255,0.14); opacity: 1; }
+  }
+  /* Synced pulse glow driven by inline --pulse-color and timing */
+  @keyframes pulse-sync {
+    0%, 100% {
+      box-shadow: 0 0 0 0 var(--pulse-color, rgba(255,92,141,0.45));
+      transform: translateZ(0) scale(1);
+      filter: drop-shadow(0 0 0 var(--pulse-color, rgba(255,92,141,0.45)));
+    }
+    50% {
+      box-shadow: 0 0 var(--pulse-blur, 40px) var(--pulse-ring, 12px) var(--pulse-color, rgba(255,92,141,0.45));
+      transform: translateZ(0) scale(1.02);
+      filter: drop-shadow(0 0 var(--pulse-blur, 18px) var(--pulse-color, rgba(255,92,141,0.45)));
+    }
+  }
+  @keyframes aurora-flow {
+    0% { transform: translate(-10%, -10%) rotate(0deg) scale(1); opacity: 0.8; }
+    50% { transform: translate(10%, 10%) rotate(180deg) scale(1.08); opacity: 1; }
+    100% { transform: translate(-10%, -10%) rotate(360deg) scale(1); opacity: 0.8; }
+  }
+  @keyframes twinkle {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(255,255,255,0.25)); opacity: 0.85; }
+    50% { filter: drop-shadow(0 0 16px rgba(255,255,255,0.5)); opacity: 1; }
+  }
+  @keyframes mood-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .animate-heartbeat-slow { animation: heartbeat-slow 2s ease-in-out infinite; }
+  .animate-glow-pulse { animation: glow-pulse 1.8s ease-in-out infinite; }
+  .animate-aurora { animation: aurora-flow 6s ease-in-out infinite; }
+  .animate-twinkle { animation: twinkle 1.4s ease-in-out infinite; }
+}
+
+@layer base {
+  body.mood-calm {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(60% 80% at 20% 20%, hsla(220, 80%, 45%, 0.18), transparent 70%), radial-gradient(60% 80% at 80% 80%, hsla(280, 70%, 50%, 0.14), transparent 70%), linear-gradient(135deg, hsl(240 30% 10%), hsl(260 30% 14%), hsl(240 25% 10%));
+    background-size: 160% 160%, 160% 160%, 200% 200%;
+    background-attachment: fixed;
+    animation: mood-shift 24s ease-in-out infinite;
+  }
+  body.mood-happy {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(60% 80% at 20% 20%, hsla(45, 90%, 55%, 0.22), transparent 70%), radial-gradient(60% 80% at 80% 80%, hsla(330, 80%, 55%, 0.16), transparent 70%), linear-gradient(135deg, hsl(260 35% 16%), hsl(280 35% 18%), hsl(260 30% 14%));
+    background-size: 160% 160%, 160% 160%, 200% 200%;
+    background-attachment: fixed;
+    animation: mood-shift 22s ease-in-out infinite;
+  }
+  body.mood-grateful {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(60% 80% at 20% 20%, hsla(330, 80%, 50%, 0.22), transparent 70%), radial-gradient(60% 80% at 80% 80%, hsla(280, 70%, 55%, 0.16), transparent 70%), linear-gradient(135deg, hsl(250 35% 14%), hsl(280 35% 18%), hsl(250 30% 12%));
+    background-size: 160% 160%, 160% 160%, 200% 200%;
+    background-attachment: fixed;
+    animation: mood-shift 20s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .hero-pulse {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 92, 141, 0.30) 0%, rgba(186, 104, 200, 0.18) 40%, rgba(186, 104, 200, 0.10) 60%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hover-soft-glow {
+    transition: box-shadow 200ms ease, transform 200ms ease, opacity 200ms ease;
+  }
+  .hover-soft-glow:hover {
+    box-shadow: 0 0 24px rgba(255, 92, 141, 0.35);
+    transform: scale(1.06);
+  }
+}
+
+@layer components {
+  .gradient-underline {
+    position: relative;
+  }
+  .gradient-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, hsla(330,85%,65%,0.6), hsla(280,85%,58%,0.6), hsla(189,94%,43%,0.6));
+    pointer-events: none;
+  }
+
+  .button-gradient {
+    border-width: 1px;
+    border-image: linear-gradient(135deg, hsl(330 85% 65%), hsl(280 85% 58%), hsl(189 94% 43%)) 1;
+    background: transparent;
+    transition: var(--transition-smooth);
+  }
+  .button-gradient:hover {
+    box-shadow: 0 0 14px hsla(280,85%,58%,0.18);
+    transform: translateY(-1px);
+  }
+
+  .card-gradient {
+    border: 1px solid transparent;
+    background-image: linear-gradient(hsl(var(--card)), hsl(var(--card))), linear-gradient(135deg, hsla(330,85%,65%,0.35), hsla(280,85%,58%,0.35), hsla(189,94%,43%,0.35));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    backdrop-filter: blur(10px);
+  }
+
+  .halo-hover {
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .halo-hover:hover {
+    box-shadow: 0 0 24px hsla(189,94%,43%,0.35), 0 0 24px hsla(280,85%,58%,0.25);
+    transform: translateY(-1px);
+  }
+
+  .section-spacing {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  @media (min-width: 768px) {
+    .section-spacing { padding-top: 2.5rem; padding-bottom: 2.5rem; padding-left: 1rem; padding-right: 1rem; }
+  }
+  @media (min-width: 1024px) {
+    .section-spacing { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+}
+
+/* Accessibility helpers */
+@layer base {
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    padding: 8px 12px;
+    z-index: 1000;
+    border-radius: 6px;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 8px;
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Clear, consistent focus-visible outlines */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */

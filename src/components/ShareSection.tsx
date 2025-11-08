@@ -1,20 +1,30 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Share2 } from "lucide-react";
+import { Heart, Share2, Copy, Twitter, MessageCircle } from "lucide-react";
 
 const ShareSection = () => {
-  const handleInvitePartner = () => {
-    const subject = encodeURIComponent("Join me on PulsePod 💫");
-    const body = encodeURIComponent(
-      "I just joined PulsePod — a beautiful way to stay present without words.\n\nLet's feel connected through gentle pulses instead of endless messages.\n\nJoin early access: https://pulsepod.app"
-    );
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  const referral = `https://pulsepod.app/invite?ref=USERNAME`;
+
+  const handleInvitePartner = async () => {
+    try {
+      await navigator.clipboard.writeText(referral);
+      (window as any).plausible?.('Invite Partner Copy');
+      // Optional: small visual feedback via console; UI toast is handled globally
+      console.log('Referral link copied:', referral);
+    } catch (e) {
+      console.warn('Copy failed');
+    }
   };
 
   const handleShareOnX = () => {
-    const tweet = encodeURIComponent(
-      "Just joined PulsePod — stay connected through presence, not words 💫✨ https://pulsepod.app"
-    );
-    window.open(`https://twitter.com/intent/tweet?text=${tweet}`, '_blank');
+    const text = encodeURIComponent("I just found PulsePod — a 1-tap way to feel someone’s presence 💗 pulsepod.app");
+    (window as any).plausible?.('Social Share - X');
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+  };
+
+  const handleShareOnWhatsApp = () => {
+    const text = encodeURIComponent("I just found PulsePod — a 1-tap way to feel someone’s presence 💗 pulsepod.app");
+    (window as any).plausible?.('Social Share - WhatsApp');
+    window.open(`https://wa.me/?text=${text}`, '_blank');
   };
 
   return (
@@ -35,8 +45,8 @@ const ShareSection = () => {
             size="lg"
             className="group bg-card/60 backdrop-blur-md border border-border/50 hover:border-primary/50 text-foreground hover:bg-card/80 transition-all duration-300 hover:scale-105 hover:-translate-y-1 h-12 md:h-14 rounded-full"
           >
-            <Heart className="w-5 h-5 mr-2 group-hover:animate-heartbeat text-primary" />
-            Invite your partner
+            <Copy className="w-5 h-5 mr-2 text-primary" />
+            Invite Your Partner
           </Button>
 
           <Button 
@@ -44,8 +54,18 @@ const ShareSection = () => {
             size="lg"
             className="group bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-semibold shadow-glow-pink hover:shadow-glow-purple transition-all duration-300 hover:scale-105 hover:-translate-y-1 h-12 md:h-14 rounded-full"
           >
-            <Share2 className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+            <Twitter className="w-5 h-5 mr-2" />
             Share on X
+          </Button>
+
+          <Button 
+            onClick={handleShareOnWhatsApp}
+            size="lg"
+            variant="outline"
+            className="group border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 h-12 md:h-14 rounded-full"
+          >
+            <MessageCircle className="w-5 h-5 mr-2" />
+            Share on WhatsApp
           </Button>
         </div>
       </div>

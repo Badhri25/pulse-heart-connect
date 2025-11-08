@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import Footer from "@/components/Footer";
 
@@ -34,23 +33,7 @@ const Contact = () => {
     }
 
     const validatedData = validation.data;
-
-    // Save to waitlist table with additional contact info
-    const { error } = await supabase
-      .from('waitlist')
-      .insert({ 
-        email: validatedData.email.toLowerCase(),
-        metadata: {
-          name: validatedData.name,
-          message: validatedData.message,
-          type: 'contact'
-        }
-      });
-
-    if (error) {
-      toast.error("Something went wrong. Please try again or email us directly.");
-      return;
-    }
+    void validatedData; // Local-only
 
     setIsSubmitted(true);
     toast.success("Thanks for reaching out! We'll get back to you soon.");

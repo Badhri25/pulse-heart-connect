@@ -14,6 +14,28 @@
     <meta name="author" content="PulsePod" />
     <meta name="keywords" content="presence, connection, couples app, long distance, heartbeat, pulse, emotional connection" />
     <meta name="theme-color" content="#FF5C8D" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/ios-icon-192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="/ios-icon-256.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/ios-icon-512.png">
+
+    <!-- Prevent theme flash: set dark class ASAP based on saved preference or system -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('themeMode') || 'system';
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored === 'dark' || (stored === 'system' && prefersDark);
+          if (isDark) document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -31,6 +53,9 @@
     <meta name="twitter:description" content="Send a heartbeat, not a message. PulsePod lets you feel presence instantly through a single tap." />
     <meta name="twitter:image" content="https://pulse-heart-connect.lovable.app/og-image.png" />
     
+    <!-- Preload critical hero image for faster LCP -->
+    <link rel="preload" as="image" href="/pulse-hero.jpg" />
+
     <!-- Analytics - Plausible (privacy-friendly) -->
     <script defer data-domain="pulse-heart-connect.lovable.app" src="https://plausible.io/js/script.js"></script>
   </head>

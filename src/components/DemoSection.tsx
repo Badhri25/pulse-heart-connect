@@ -7,6 +7,7 @@ const DemoSection = () => {
 
   const handlePlayDemo = () => {
     setIsPlaying(true);
+    (window as any).plausible?.('Demo Play');
     setTimeout(() => setIsPlaying(false), 4500);
   };
 

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const emailSchema = z.string()
@@ -14,6 +13,7 @@ const emailSchema = z.string()
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Supabase removed for now
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,23 +26,21 @@ const WaitlistSection = () => {
     }
 
     const validatedEmail = validation.data.toLowerCase();
-
-    // Save to database
-    const { error } = await supabase
-      .from('waitlist')
-      .insert({ email: validatedEmail });
-
-    if (error) {
-      if (error.code === '23505') {
-        toast.error("This email is already on the waitlist!");
-      } else {
-        toast.error("Something went wrong. Please try again.");
+    try {
+      const pid = (import.meta as any).env?.VITE_FIREBASE_PROJECT_ID as string | undefined;
+      if (pid) {
+        const url = `https://us-central1-${pid}.cloudfunctions.net/sendWaitlistEmail`;
+        await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: validatedEmail })
+        }).catch(() => {});
       }
-      return;
-    }
+    } catch {}
 
     setIsSubmitted(true);
-    toast.success("💖 Thanks for joining early access! You'll be among the first to feel the pulse.");
+    toast.success("You’re on the list 💗");
+    (window as any).plausible?.('Waitlist Submit');
     setEmail("");
   };
 
@@ -52,12 +50,14 @@ const WaitlistSection = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 md:w-[500px] h-96 md:h-[500px] bg-primary/20 rounded-full blur-3xl animate-heartbeat" />
       
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 md:mb-4 text-foreground leading-tight">
           Be part of the first<br />
           <span className="text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text">
             100 PulsePairs
           </span>
         </h2>
+
+        {/* Live counter disabled for now */}
         
         <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-12">
           Join the first wave and help us build something beautiful together.
@@ -83,7 +83,7 @@ const WaitlistSection = () => {
         ) : (
           <div className="p-6 rounded-2xl bg-card/60 backdrop-blur-md border border-primary/50 max-w-md mx-auto">
             <p className="text-lg text-primary font-medium">
-              ✨ You're on the list! Stay tuned for your first pulse 💫
+              You’re on the list 💗
             </p>
           </div>
         )}

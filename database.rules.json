@@ -1,0 +1,114 @@
+  {
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "stats": {
+      ".read": true,
+      "totalPulses": {
+        ".write": "auth != null && newData.isNumber() && (!data.exists() || newData.val() >= data.val())"
+      },
+      "daily": {
+        "$ymd": {
+          ".read": true,
+          ".write": "auth != null && newData.isNumber() && (!data.exists() || newData.val() >= data.val())"
+        }
+      }
+    },
+    "globalHeat": {
+      ".read": true,
+      "$day": {
+        "$bucket": {
+          "count": { ".write": "auth != null && (newData.isNumber() || newData.val() == null)" },
+          "lastTs": { ".write": "auth != null && newData.isNumber()" }
+        }
+      }
+    },
+    "globalLive": {
+      ".read": true,
+      "$key": {
+        ".write": "auth != null && newData.hasChildren(['b','ts']) && newData.child('b').isString() && newData.child('ts').isNumber() && (!newData.child('c').exists() || newData.child('c').isString())"
+      }
+    },
+    "handles": {
+      "$handle": {
+        ".read": true,
+        ".write": "auth != null && !data.exists() && newData.hasChildren(['uid','code']) && newData.child('uid').val() == auth.uid && newData.child('code').isString() && newData.child('code').val().matches(/^[A-Z0-9]{6}$/) && $handle.matches(/^[a-z0-9-]{3,20}$/)",
+        ".validate": "newData.hasChildren(['uid','code']) && newData.child('uid').isString() && newData.child('code').isString()"
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        "handle": {
+          ".write": "auth != null && auth.uid == $uid && newData.isString() && newData.val().matches(/^[a-z0-9-]{3,20}$/)"
+        },
+        "linkCode": {
+          ".write": "auth != null && auth.uid == $uid && newData.isString() && newData.val().matches(/^[A-Z0-9]{6}$/) && (!data.exists())",
+          ".read": "auth != null && auth.uid == $uid"
+        }
+      }
+    },
+    "pairs": {
+      "$pair": {
+        ".read": "auth != null",
+        "pulse": {
+          ".write": "auth != null && newData.hasChildren(['ts']) && newData.child('ts').isNumber() && ( !data.parent().child('meta').child('lastPulseTs').exists() || (newData.child('ts').val() - data.parent().child('meta').child('lastPulseTs').val()) >= 1000 ) && (!newData.child('color').exists() || newData.child('color').isString()) && (!newData.child('shape').exists() || newData.child('shape').isString()) && (!newData.child('rhythmMs').exists() || newData.child('rhythmMs').isNumber())",
+          ".validate": "newData.hasChildren(['ts'])"
+        },
+        "pulseEnc": {
+          ".write": "auth != null && newData.hasChildren(['ts','ct','iv']) && newData.child('ts').isNumber() && newData.child('ct').isString() && newData.child('iv').isString() && ( !data.parent().child('meta').child('lastPulseTs').exists() || (newData.child('ts').val() - data.parent().child('meta').child('lastPulseTs').val()) >= 1000 )",
+          ".validate": "newData.hasChildren(['ts','ct','iv'])"
+        },
+        "streak": {
+          ".read": "auth != null",
+          ".write": "auth != null",
+          ".validate": "newData.hasChildren(['count','lastDate'])",
+          "count": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "lastDate": { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)" }
+        },
+        "receipts": {
+          ".read": "auth != null",
+          "$ts": {
+            ".validate": "$ts.matches(/^[0-9]+$/)",
+            "$uid": {
+              ".write": "auth != null && auth.uid == $uid && newData.isNumber()",
+              ".read": "auth != null"
+            }
+          }
+        },
+        "meta": {
+          "lastPulseTs": {
+            ".write": "auth != null && newData.isNumber() && ( !data.exists() || (newData.val() - data.val()) >= 0 )"
+          },
+          "lastFrom": {
+            ".write": "auth != null && (newData.isString() || newData.val() === null)"
+          }
+        },
+        "history": {
+          ".write": "auth != null",
+          "$key": {
+            ".validate": "newData.hasChildren(['ts']) && newData.child('ts').isNumber()"
+          }
+        },
+        "presence": {
+          "$uid": {
+            ".write": "auth != null && auth.uid == $uid",
+            ".read": "auth != null"
+          }
+        },
+        "activity": {
+          "$uid": {
+            ".write": "auth != null && auth.uid == $uid && newData.isNumber()",
+            ".read": "auth != null"
+          }
+        },
+        "tokens": {
+          "$uid": {
+            ".write": "auth != null && auth.uid == $uid",
+            ".read": "auth != null && auth.uid == $uid"
+          }
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      pairs: {
+        Row: {
+          id: string
+          code: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          code: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          code?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      pulses: {
+        Row: {
+          id: string
+          pair_code: string
+          created_at: string
+          payload: Json | null
+        }
+        Insert: {
+          id?: string
+          pair_code: string
+          created_at?: string
+          payload?: Json | null
+        }
+        Update: {
+          id?: string
+          pair_code?: string
+          created_at?: string
+          payload?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pulses_pair_code_fkey"
+            columns: ["pair_code"]
+            isOneToOne: false
+            referencedRelation: "pairs"
+            referencedColumns: ["code"]
+          }
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -64,6 +111,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      get_waitlist_count: {
+        Args: Record<string, never>
+        Returns: number
       }
     }
     Enums: {

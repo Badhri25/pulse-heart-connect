@@ -16,6 +16,19 @@ const Payment = () => {
     animationSpeed: "2s",
   };
 
+  const stripeLink = (import.meta as any).env?.VITE_STRIPE_LINK_199 as string | undefined;
+  const handleStripe = () => {
+    if (stripeLink) {
+      window.location.href = stripeLink;
+      return;
+    }
+    toast({
+      title: "Stripe link not configured",
+      description: "Add VITE_STRIPE_LINK_199 to .env.local with your Stripe Payment Link to go live.",
+      variant: "destructive",
+    });
+  };
+
   const handlePayment = (method: string) => {
     console.log("Payment initiated with:", method);
     toast({
@@ -43,7 +56,7 @@ const Payment = () => {
         </div>
 
         {/* Design Summary Card */}
-        <Card className="mb-8 border-border/50 bg-card/50 backdrop-blur-sm animate-fade-in">
+        <Card className="mb-8 card-gradient border-border/40 bg-card/40 backdrop-blur-md animate-fade-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               Your Custom Pulse
@@ -78,7 +91,7 @@ const Payment = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold">Custom Pulse Design</h3>
-              <p className="text-2xl font-bold text-primary">$2.99</p>
+              <p className="text-2xl font-bold text-primary">$1.99</p>
             </div>
             <p className="text-sm text-muted-foreground">
               One-time payment • Includes your chosen color, rhythm, and shape • Instant activation
@@ -93,21 +106,21 @@ const Payment = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <Button
-              onClick={() => handlePayment("Credit/Debit Card")}
+              onClick={handleStripe}
               variant="outline"
-              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300"
+              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300 button-gradient"
             >
               <CreditCard className="w-6 h-6" />
               <div>
-                <p className="font-semibold">Credit / Debit Card</p>
-                <p className="text-xs text-muted-foreground">Secure payment via Stripe</p>
+                <p className="font-semibold">Credit / Debit Card (Stripe)</p>
+                <p className="text-xs text-muted-foreground">Visa / MasterCard / AmEx • Apple Pay / Google Pay</p>
               </div>
             </Button>
 
             <Button
               onClick={() => handlePayment("UPI")}
               variant="outline"
-              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300"
+              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300 button-gradient"
             >
               <Smartphone className="w-6 h-6" />
               <div>
@@ -119,12 +132,24 @@ const Payment = () => {
             <Button
               onClick={() => handlePayment("PayPal")}
               variant="outline"
-              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300"
+              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300 button-gradient"
             >
               <DollarSign className="w-6 h-6" />
               <div>
                 <p className="font-semibold">PayPal</p>
                 <p className="text-xs text-muted-foreground">Fast & secure checkout</p>
+              </div>
+            </Button>
+
+            <Button
+              onClick={() => handlePayment("Stripe")}
+              variant="outline"
+              className="w-full h-16 text-left justify-start gap-4 hover:bg-primary/10 hover:border-primary transition-all duration-300 button-gradient"
+            >
+              <CreditCard className="w-6 h-6" />
+              <div>
+                <p className="font-semibold">Stripe</p>
+                <p className="text-xs text-muted-foreground">Trusted global payments</p>
               </div>
             </Button>
           </CardContent>
