@@ -1,48 +1,34 @@
 // netlify/functions/addEmail.js
 import { Client } from "pg";
 
-// Netlify will automatically provide DATABASE_URL from the Neon integration
 export async function handler(event) {
-  // 1️⃣ Only allow POST requests
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
-    // 2️⃣ Parse the incoming request (expecting JSON { name, email })
-    const { name, email } = JSON.parse(event.body || "{}");
-
-    // 3️⃣ Basic validation
-    if (!name || !email) {
-      return { statusCode: 400, body: "Missing name or email" };
+    const { name = null, email } = JSON.parse(event.body || "{}");
+    if (!email || !/.+@.+\..+/.test(email)) {
+      return { statusCode: 400, body: "Invalid email" };
     }
 
-    // 4️⃣ Connect to Neon (Postgres)
     const client = new Client({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.DATABASE_URL, // auto from Netlify–Neon integration
       ssl: { rejectUnauthorized: false },
     });
 
     await client.connect();
-
-    // 5️⃣ Insert into your waitlist table
+    // upsert: insert if new, ignore if duplicate email
     await client.query(
-      "INSERT INTO waitlist (name, email) VALUES ($1, $2)",
-      [name, email]
+      `INSERT INTO waitlist (name, email) VALUES ($1, $2)
+       ON CONFLICT (email) DO NOTHING`,
+      [name, email.toLowerCase().trim()]
     );
-
     await client.end();
 
-    // 6️⃣ Respond success
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ ok: true, message: "Added to waitlist!" }),
-    };
+    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
   } catch (err) {
-    console.error("❌ Error inserting:", err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ ok: false, error: err.message }),
-    };
+    console.error("addEmail error:", err);
+    return { statusCode: 500, body: JSON.stringify({ ok: false, error: err.message }) };
   }
 }
