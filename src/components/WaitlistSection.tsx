@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
+import { rtdb, auth } from "@/integrations/firebase";
 
 const emailSchema = z.string()
   .trim()
@@ -27,16 +28,21 @@ const WaitlistSection = () => {
 
     const validatedEmail = validation.data.toLowerCase();
     try {
-      const pid = (import.meta as any).env?.VITE_FIREBASE_PROJECT_ID as string | undefined;
-      if (pid) {
-        const url = `https://us-central1-${pid}.cloudfunctions.net/sendWaitlistEmail`;
-        await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: validatedEmail })
-        }).catch(() => {});
+      // Ensure we're signed in anonymously for RTDB rules
+      const user = auth.currentUser;
+      if (!user) {
+        await auth.signInAnonymously().catch(() => {});
       }
-    } catch {}
+
+      // Write directly to RTDB under /waitlist
+      await rtdb.ref("waitlist").push({
+        email: validatedEmail,
+        createdAt: Date.now(),
+      });
+    } catch (err) {
+      toast.error("Unable to save your email. Please try again.");
+      return;
+    }
 
     setIsSubmitted(true);
     toast.success("You’re on the list 💗");
