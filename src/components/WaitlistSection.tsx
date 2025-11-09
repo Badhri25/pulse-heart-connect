@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
-import { rtdb, auth } from "@/integrations/firebase";
+// Netlify function call; no direct DB write from client
 
 const emailSchema = z.string()
   .trim()
@@ -15,6 +15,16 @@ const WaitlistSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   // Supabase removed for now
+
+  async function submitEarlyAccess(payload: { email: string; name?: string }) {
+    const res = await fetch("/.netlify/functions/addEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Submit failed");
+    return res.json().catch(() => ({}));
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,17 +38,7 @@ const WaitlistSection = () => {
 
     const validatedEmail = validation.data.toLowerCase();
     try {
-      // Ensure we're signed in anonymously for RTDB rules
-      const user = auth.currentUser;
-      if (!user) {
-        await auth.signInAnonymously().catch(() => {});
-      }
-
-      // Write directly to RTDB under /waitlist
-      await rtdb.ref("waitlist").push({
-        email: validatedEmail,
-        createdAt: Date.now(),
-      });
+      await submitEarlyAccess({ email: validatedEmail });
     } catch (err) {
       toast.error("Unable to save your email. Please try again.");
       return;
