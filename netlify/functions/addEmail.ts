@@ -60,7 +60,7 @@ export const handler: Handler = async (event) => {
     // ✅ Send thank-you email via Resend
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
-        from: "PulsePod <no-reply@pulsepod.app>",
+        from: 'onboarding@resend.dev',
         to: email,
         subject: "❤️ Thanks for being an early PulsePod user",
         html: `
