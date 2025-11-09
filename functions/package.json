@@ -20,5 +20,13 @@
     "gh-pages": "^6.0.0",
     "lovable-tagger": "^1.0.0",
     "typescript": "^5.4.0"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
